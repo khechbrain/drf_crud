@@ -20,21 +20,21 @@ def clients(request):
         if items:
             return Response(serializer.data)
         else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response([])
 
     elif request.method == 'POST':
         item = ClientSerializer(data=request.data)
         # validating for already existing data
 
-        ex_client = Client.objects.all().filter(customer_email = request.data['customer_email'])
-        if ex_client:
-            return Response('Email déja utilisé',status=status.HTTP_409_CONFLICT)
+        # ex_client = Client.objects.all().filter(email = request.data['email'])
+        # if ex_client:
+        #     return Response('Email déja utilisé',status=status.HTTP_409_CONFLICT)
     
         if item.is_valid():
             item.save()
             return Response(item.data)
         else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(['user_name', 'email', 'password'],status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET','POST'])
