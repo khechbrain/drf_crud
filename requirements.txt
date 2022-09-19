@@ -87,7 +87,6 @@ more-itertools==4.2.0
 msal==1.18.0
 msal-extensions==0.3.1
 msrest==0.7.1
-nemo-emblems==5.0.0
 netaddr==0.7.19
 netifaces==0.10.4
 oauthlib==3.1.0
