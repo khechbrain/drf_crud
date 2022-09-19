@@ -2,10 +2,25 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models.client import Client
 from .models.produit import Produit
-from .serializers.client import ClientSerializer
+from .serializers.client import ClientSerializer, LoginSerializer
 from .serializers.produits import ProduitSerializer
 from rest_framework import status
   
+@api_view(['POST'])
+def login(request):
+    item = LoginSerializer(data=request.data)
+    if item.is_valid():
+
+        client = Client.objects.all().filter(email = request.data['email'],password=request.data['password'])
+        if client:
+            return Response(item.data)
+        else:
+            return Response('Email ou mot de passe incorrect', status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        return Response(['user_name', 'email', 'password'],status=status.HTTP_400_BAD_REQUEST)
+    # return Response(['user_name', 'email', 'password'],status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(['GET','POST'])
 def clients(request):
     if request.method == 'GET':
@@ -51,7 +66,7 @@ def produits(request):
         if items:
             return Response(serializer.data)
         else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response([])
 
     elif request.method == 'POST':
         item = ProduitSerializer(data=request.data)
