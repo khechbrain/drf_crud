@@ -90,7 +90,6 @@ msrest==0.7.1
 netaddr==0.7.19
 netifaces==0.10.4
 oauthlib==3.1.0
-onboard==1.4.1
 packaging==20.3
 PAM==0.4.2
 paramiko==2.11.0
