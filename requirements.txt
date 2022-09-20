@@ -1,5 +1,6 @@
 alembic==1.8.1
 appdirs==1.4.3
+apt-clone==0.2.1
 apturl==0.5.2
 asgiref==3.5.2
 Authlib==0.15.5
@@ -36,7 +37,7 @@ defer==1.0.6
 defusedxml==0.7.1
 distlib==0.3.0
 distro==1.4.0
-dj-database-url==0.4.2
+dj-database-url==1.0.0
 Django==4.1.1
 django-allauth==0.51.0
 django-cors-headers==3.13.0
