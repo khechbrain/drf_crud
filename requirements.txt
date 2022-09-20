@@ -27,13 +27,11 @@ configobj==5.0.6
 coreapi==2.3.3
 coreschema==0.0.4
 cryptography==3.4.8
-cupshelpers==1.0
 dbus-python==1.2.16
 defer==1.0.6
 defusedxml==0.7.1
 distlib==0.3.0
 distro==1.4.0
-dj-database-url==1.0.0
 Django==4.1.1
 django-allauth==0.51.0
 django-cors-headers==3.13.0
