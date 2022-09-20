@@ -13,21 +13,15 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
-import dotenv
-import django_heroku
 
-# This line should already exist in your settings.py
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# This is new:
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&@fq07n^r9un-s$9_qbl1xx&fc3+i3@k5uyrxlp(^-40h#ylr6'
+SECRET_KEY = 'yjbae$vgtfdjk3y1)er)m4n(*9)4f528owz8*vm6p*du3qj(+p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -51,8 +45,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -86,28 +78,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'drf_crud.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'drf',
+        'USER': 'postgres',
+        'PASSWORD': 'Mcn962016',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-#     # 'default': {
-#     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#     #     'NAME': 'drf',
-#     #     'USER': 'postgres',
-#     #     'PASSWORD': 'Mcn962016',
-#     #     'HOST': 'localhost',
-#     #     'PORT': '5432',
-#     # }
-# }
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = 'static/'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -145,8 +131,3 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # This should already be in your settings.py
-
-django_heroku.settings(locals())
-# This is new
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
